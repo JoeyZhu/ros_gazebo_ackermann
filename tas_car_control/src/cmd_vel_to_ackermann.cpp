@@ -44,7 +44,7 @@ void CmdVelToAckermann::cmdVelCallback(const geometry_msgs::Twist::ConstPtr &msg
     }
     else if (m_steering_angle < 0 && m_steering_angle < -1 * MAX_STEERING_ANGLE)
     {
-        m_steering_angle = MAX_STEERING_ANGLE;
+        m_steering_angle = -MAX_STEERING_ANGLE;
     }
 
     // Publish the data.
@@ -60,7 +60,7 @@ void CmdVelToAckermann::cmdVelCallback(const geometry_msgs::Twist::ConstPtr &msg
 
 void CmdVelToAckermann::convertTransRotToSteeringAngle(double speed, double w, double wheelbase)
 {
-    if (speed == 0 || w == 0)
+    if (speed == 0)
     {
         m_speed = 0.0;
         m_steering_angle = 0.0;
